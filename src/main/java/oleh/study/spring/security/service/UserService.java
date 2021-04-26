@@ -1,6 +1,7 @@
 package oleh.study.spring.security.service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import oleh.study.spring.security.entity.Otp;
 import oleh.study.spring.security.entity.User;
 import oleh.study.spring.security.repository.OtpRepository;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @Service
 @Transactional
 @AllArgsConstructor
+@Slf4j
 public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -55,6 +57,8 @@ public class UserService {
             Otp otp = new Otp(user.getUsername(), code);
             otpRepository.save(otp);
         }
+
+        log.info("code " + code + " was refreshed");
     }
 
     public boolean check(Otp otpToValidate) {

@@ -29,12 +29,14 @@ public class AuthController {
         log.info("User " + user + " was authenticated");
     }
 
-    @PostMapping("/opt/check")
+    @PostMapping("/otp/check")
     public void check(@RequestBody Otp otp, HttpServletResponse response) {
         if (userService.check(otp)) {
             response.setStatus(HttpServletResponse.SC_OK);
+            log.info("otp is valid");
         } else {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            log.info("otp is not valid");
         }
     }
 }

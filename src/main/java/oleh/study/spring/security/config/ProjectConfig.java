@@ -27,8 +27,6 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .anyRequest().permitAll();
 
-        http.headers().frameOptions().disable();
-
         http.addFilterBefore(requestValidationFilter, BasicAuthenticationFilter.class);
     }
 }

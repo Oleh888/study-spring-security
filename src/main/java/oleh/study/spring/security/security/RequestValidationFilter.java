@@ -13,7 +13,8 @@ public class RequestValidationFilter implements Filter {
     @Value("${application.key}")
     private String appTokenFromConfig;
 
-    public final static String APPLICATION_TOKEN = "application-key";
+    public final static String APP_KEY_HEADER = "application-key";
+
     @Override
     public void doFilter(ServletRequest request,
                          ServletResponse response,
@@ -24,7 +25,7 @@ public class RequestValidationFilter implements Filter {
         HttpServletResponse httpServletResponse =
                 (HttpServletResponse) response;
 
-        String appTokenFromHeader = httpServletRequest.getHeader(APPLICATION_TOKEN);
+        String appTokenFromHeader = httpServletRequest.getHeader(APP_KEY_HEADER);
 
         if (!appTokenFromConfig.equals(appTokenFromHeader)) {
             httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
